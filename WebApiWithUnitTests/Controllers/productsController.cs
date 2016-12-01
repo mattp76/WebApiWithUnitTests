@@ -10,6 +10,8 @@ using WebApiWithUnitTests.Interfaces;
 
 namespace WebApiWithUnitTests.Controllers
 {
+
+    [RoutePrefix("api/v1/products")]
     public class ProductsController : ApiController
     {
 
@@ -20,6 +22,8 @@ namespace WebApiWithUnitTests.Controllers
             _repository = repository;
         }
 
+        // GET api/v1/products/1
+        [Route("{id:int}")]
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
@@ -42,6 +46,9 @@ namespace WebApiWithUnitTests.Controllers
             }
         }
 
+
+        // GET api/v1/products
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage Get()
         {

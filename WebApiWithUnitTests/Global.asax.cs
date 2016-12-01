@@ -25,6 +25,8 @@ namespace WebApiWithUnitTests
 
             Ioc.AppRegistration.Register();
 
+            GlobalConfiguration.Configuration.EnsureInitialized(); 
+
 
         }
     }
