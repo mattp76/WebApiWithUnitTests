@@ -1,0 +1,25 @@
+﻿{
+  "productitems": [ 
+   {
+	  "id": "1",
+	  "firstname": "Scooter",
+	  "lastname": "Parker",
+	  "items": [
+		  {"value": "car", "age": "100"},
+		  {"value": "boat", "age": "200"},
+		  {"value": "plane", "age": "300"}
+		  ]
+	 },
+	 {
+	  "id": "2",
+	  "firstname": "Leonardo",
+	  "lastname": "Parker",
+	  "items": [
+		  {"value": "fishing", "age": "50"},
+		  {"value": "football", "age": "60"},
+		  {"value": "cricket", "age": "70"}
+		 ]
+	
+    } 
+   ] 
+}
