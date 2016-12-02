@@ -13,32 +13,22 @@ namespace WebApiWithUnitTests.Test
     {
 
         private Products _products;
+        private String _productsStr;
 
         public MockRepository()
         {
-
-            //String expected = "{friends:[{id:123,name:\"Corby Page\"},{id:456,name:\"Carter Page\"}]}";
-            String mockJsonString = "{productitems: [{id:2,firstname:\"Leonardo\",lastname:\"Parker\", items: [{Value:\"fishing\", Age:\"50\"}]}]}";
-            _products = JsonConvert.DeserializeObject<Products>(mockJsonString);
-
+            _productsStr = "{productitems: [{id:2,firstname:\"Leonardo\",lastname:\"Parker\", items: [{Value:\"fishing\", Age:\"50\"}]}]}";
+            _products = JsonConvert.DeserializeObject<Products>(_productsStr);
         }
 
-
-        public string GetById(int id)
-        {
-
-            var res = from r in _products.ProductItems
-                      where r.id == id
-                      select r.FirstName;
-
-
-            return res.FirstOrDefault();
-        }
-
-
-        public Products GetById()
+        public Products GetSnapShot()
         {
             return _products;
+        }
+
+        public String GetSnapShotString()
+        {
+            return _productsStr;
         }
     }
 }

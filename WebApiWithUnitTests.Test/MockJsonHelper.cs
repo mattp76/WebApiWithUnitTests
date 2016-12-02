@@ -12,18 +12,44 @@ namespace WebApiWithUnitTests.Test
     public class MockJsonHelper : IJsonHelper
     {
 
-        private Products _products;
+         private Products _products;
+        private String _productsStr;
+        protected readonly IRepository _respository;
 
-        public MockJsonHelper()
+        public MockJsonHelper(IRepository respository) 
         {
-
-            var mockJsonString = "productitems: [{id:5,firstname:'Jennifer',lastname:'Parker',items:[{Value:'fishing',Age:'50'},{Value:'football',Age:'60'},{Value:'cricket',Age:'70'}]}}]";
-            _products = JsonConvert.DeserializeObject<Products>(mockJsonString);
-
+            _products = _respository.GetSnapShot();
+            _productsStr = _respository.GetSnapShotString();
         }
 
 
-        public Products GetSnapShot()
+        public string GetById(int id)
+        {
+
+            var res = from r in _products.ProductItems
+                      where r.id == id
+                      select r.FirstName;
+
+
+            return res.FirstOrDefault();
+        }
+
+
+        public Products GetById()
+        {
+            return _products;
+        }
+
+
+        public List<String> GetByIdUsingLinqJson(int id)
+        {
+            List<String> values = new List<String>();
+            return values;
+        }
+
+
+        //Async Example
+        public async Task<Products> GetByIdASync()
         {
             return _products;
         }

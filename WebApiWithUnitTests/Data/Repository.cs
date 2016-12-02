@@ -8,38 +8,55 @@ using WebApiWithUnitTests.Helpers;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace WebApiWithUnitTests.Data
 {
     public class Repository : IRepository
     {
 
-        private Products _products;
-        protected readonly IJsonHelper _jsonHelper;
+        private const string fileName = "test.json";
+        private static readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Data\", fileName);
 
-        public Repository(IJsonHelper jsonHelper) 
+
+        public Products GetSnapShot()
         {
-            _jsonHelper = jsonHelper;
-            _products = _jsonHelper.GetSnapShot();
+            try
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    Products products = JsonConvert.DeserializeObject<Products>(json);
+                    return products;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
 
 
-        public string GetById(int id)
+        public String GetSnapShotString()
         {
+            try
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    return json;
+                }
 
-           var res = from r in _products.ProductItems
-                      where r.id == id
-                      select r.FirstName;
+            }
+            catch (Exception ex)
+            {
 
-
-            return res.FirstOrDefault();
+                return null;
+            }
         }
-
-
-        public Products GetById()
-        {
-             return _products;
-        }
-
     }
 }

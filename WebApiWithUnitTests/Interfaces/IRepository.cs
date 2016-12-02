@@ -9,7 +9,7 @@ namespace WebApiWithUnitTests.Interfaces
 {
     public interface IRepository
     {
-        Products GetById();
-        string GetById(int id);
+        Products GetSnapShot();
+        String GetSnapShotString();
     }
 }
